@@ -1,0 +1,50 @@
+<head>
+  <title>TaskTracker</title>
+</head>
+
+<body>
+  <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation">{{> loginButtons}}</li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">TaskTracker</h3>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Sign in to add your task</h3>
+          {{#if currentUser}}
+          <form class="form-group addtask">
+            <input type="text" placeholder="Add new task..." class="form-control" name="text">
+          </form>
+          {{/if}}
+        </div>
+        <div class="col-md-12">
+          {{> TaskList}}
+        </div>
+      </div>
+
+      <footer class="footer">
+        <p>&copy; 2016 TaskTracker</p>
+      </footer>
+
+    </div> <!-- /container -->
+</body>
+
+
+<template name="TaskList">
+  <ul>
+    {{#each taskList}}
+      <li class="{{#if checked}}checked{{/if}}">
+        {{#if currentUser}}
+        <button class="delete">&times;</button>
+        <input type="checkbox" class="toggle-checked" checked="{{checked}}">
+        {{/if}}
+        <span>{{task}} - <i>{{author}}</i></span>
+      </li>
+    {{/each}}
+  </ul>
+</template>
